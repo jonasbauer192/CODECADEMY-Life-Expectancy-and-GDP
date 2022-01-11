@@ -60,33 +60,33 @@ class plot:
                                 "title": "GDP by Year"}]
 
         fig = plt.figure("Life Expectancy and GDP Trends by Year", figsize=(16, 9))
-        for lst in plotCharacteristics:
-            ax = plt.subplot(1, 2, lst["subplot index"])
+        for dct in plotCharacteristics:
+            ax = plt.subplot(1, 2, dct["subplot index"])
 
             # plot of the mean of all countries by year
-            meanDf = self.createMeanDf("Year", lst["column"])
+            meanDf = self.createMeanDf("Year", dct["column"])
             columns = meanDf.columns
             plt.plot(meanDf[columns[0]],
                      meanDf[columns[1]],
                      color = "black",
                      linestyle = "-",
                      marker = "o",
-                     label = lst["plot 1 label"])
+                     label = dct["plot 1 label"])
 
             # plot of all single countries by year
             for country in list(self.df["Country"].unique()):
                 countryDf = self.df[self.df["Country"] == country]
                 plt.plot(countryDf["Year"],
-                         countryDf[lst["column"]],
+                         countryDf[dct["column"]],
                          linestyle="--",
                          marker=".",
-                         label=lst["plot 2 label"] + country)
+                         label=dct["plot 2 label"] + country)
 
             ax.set_xticks(range(np.amin(meanDf["Year"]), np.amax(meanDf["Year"] + 4), 4))
             plt.xlabel("Year")
-            plt.ylabel(lst["label y axis"])
+            plt.ylabel(dct["label y axis"])
             plt.legend(loc="best")
-            plt.title(lst["title"])
+            plt.title(dct["title"])
 
         plt.savefig("Life Expectancy and GDP Trends by Year.png")
         plt.show()
