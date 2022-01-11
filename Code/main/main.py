@@ -120,7 +120,7 @@ class plot:
         plt.legend(loc="upper left")
         plt.title("KDE Plot of the Life Expectancy by Country")
 
-        # standardized KDE plot
+        # normalized KDE plot
         plt.subplot(2, 2, 3)
         for country, color in zip(list(self.df["Country"].unique()), self.colors):
             countryDf = self.df[self.df["Country"] == country]
@@ -160,7 +160,5 @@ if __name__ == '__main__':
     plotObject.linePlot()
     plotObject.corrleationPlot()
     plotObject.distributionPlots()
-
-    a = 1
 
 
